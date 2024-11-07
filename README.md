@@ -10,4 +10,5 @@ Grpc server in go for test purposes.
 
 ### Modules
 
-- go mod init just create a
+- go mod init just create a modules
+- go mod tidy install the dependencies
