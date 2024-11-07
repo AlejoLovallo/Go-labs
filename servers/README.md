@@ -1,16 +1,34 @@
 # GRPC Server
 
-### Folder Structure
+This is a simple gRPC server implementation in Go that provides a ping service. The server listens on port 50051 and responds to ping requests with a "Pong" message and timestamp.
 
-- `server.go`: Defines the server implementation.
-- `client.go`: Defines the client implementation.
-- `main.go`: Entry point for the server.
+### Features
+- Basic ping/pong service
+- Timestamp included in response
+- TCP server on port 50051
 
+### Generate the proto files
 
-### Instructions
-
-1. Run `go mod tidy` to install the dependencies.
-2. Run `go run main.go` to start the server.
-3. Run `go run client.go` to test the server.
-
+```
 protoc --go_out=. --go-grpc_out=. server.proto
+```
+
+### Running the Server
+
+1. Start the server:
+
+* From root folder
+
+```bash
+go run main.go
+```
+
+2. Start the client
+
+* From server_client folder
+
+```bash
+go run main.go
+```
+
+
