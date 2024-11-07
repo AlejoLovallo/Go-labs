@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package chat;
+
+option go_package = "proto/chat";
+
+// Define a ChatService with a ChatStream RPC method for bidirectional streaming
+service ChatService {
+  rpc ChatStream(stream ChatMessage) returns (stream ChatMessage);
+}
+
+// Define the message format
+message ChatMessage {
+  string user = 1;
+  string message = 2;
+}
