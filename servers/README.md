@@ -32,3 +32,61 @@ go run main.go
 ```
 
 
+### Docker
+
+* Create network
+
+```bash
+docker network create grpc-network
+```
+
+* Build docker server image
+
+```bash
+docker build -f Dockerfile.server_client -t go-grpc-client:latest . 
+```
+
+* Build docker client image
+
+```bash
+docker build -f Dockerfile.server_client -t go-grpc-client:latest . 
+```
+
+* Run docker server
+
+```bash
+docker run -d --name grpc-server --network grpc-server-network -p 50051:50051 go-grpc-server:latest
+```
+
+* Run docker client
+
+```bash
+docker run --name grpc-server-client --network grpc-server-network go-grpc-client:latest
+```
+
+* Notice the change on the ip address on the client side:
+
+```go
+conn, err := grpc.Dial("grpc-server:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
+```
+
+
+### Using docker compose
+
+* Build 
+
+```bash
+docker compose -f docker-compose.server.yaml build
+```
+
+* Run
+
+```bash
+ docker compose -f docker-compose.server.yaml up -d  
+```
+
+* Here the change will as the name of the service server
+
+```go
+conn, err := grpc.Dial("server:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
+```
