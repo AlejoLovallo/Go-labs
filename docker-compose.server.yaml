@@ -1,0 +1,24 @@
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    ports:
+      - "50051:50051"
+    networks:
+      - grpc-server-network
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.server_client
+    depends_on:
+      - server
+    networks:
+      - grpc-server-network 
+      
+networks:
+  grpc-server-network:
+    external: true
+    driver: bridge
